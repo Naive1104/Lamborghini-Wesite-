@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamborghini - Performance Unleashed</title>
+    <style>
+        :root {
+            --primary-color: #f0b007;
+            --dark-background: #111;
+            --light-text: #fff;
+            --accent-color: #444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-background);
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .navbar-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .navbar-links li {
+            margin-left: 1.5rem;
+        }
+
+        .navbar-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), 
+                        url('https://via.placeholder.com/1920x1080?text=Lamborghini+Background') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--dark-background);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+        }
+
+        /* Models Section */
+        .models-section {
+            padding: 5rem 5%;
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .model-card {
+            background-color: #222;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .model-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .model-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .model-details {
+            padding: 1.5rem;
+        }
+
+        .model-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .model-specs {
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .model-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Test Drive Form */
+        .test-drive-section {
+            background-color: #222;
+            padding: 5rem 5%;
+        }
+
+        .test-drive-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background-color: #333;
+            border: 2px solid #444;
+            color: var(--light-text);
+            border-radius: 5px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group.error .form-control {
+            border-color: red;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #000;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer-copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <img src="https://via.placeholder.com/50x50?text=Logo" alt="Lamborghini Logo">
+            <span>Lamborghini</span>
+        </div>
+        <ul class="navbar-links">
+            <li><a href="#models">Models</a></li>
+            <li><a href="#test-drive">Test Drive</a></li>
+            <li><a href="#">Configurator</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Unleash Performance</h1>
+            <p class="hero-subtitle">Experience the pinnacle of automotive engineering and Italian craftsmanship</p>
+            <a href="#models" class="btn-primary">Explore Models</a>
+        </div>
+    </section>
+
+    <!-- Models Section -->
+    <section id="models" class="models-section">
+        <div class="models-grid">
+            <div class="model-card">
+                <img src="https://via.placeholder.com/400x250?text=Aventador" alt="Aventador" class="model-image">
+                <div class="model-details">
+                    <h3 class="model-name">Aventador</h3>
+                    <p class="model-specs">6.5L V12 | 0-60 mph in 2.8s | 217 mph</p>
+                    <p class="model-price">$501,953</p>
+                </div>
+            </div>
+            <div class="model-card">
+                <img src="https://via.placeholder.com/400x250?text=Huracan" alt="Huracan" class="model-image">
+                <div class="model-details">
+                    <h3 class="model-name">Huracán</h3>
+                    <p class="model-specs">5.2L V10 | 0-60 mph in 2.5s | 202 mph</p>
+                    <p class="model-price">$333,633</p>
+                </div>
+            </div>
+            <div class="model-card">
+                <img src="https://via.placeholder.com/400x250?text=Urus" alt="Urus" class="model-image">
+                <div class="model-details">
+                    <h3 class="model-name">Urus</h3>
+                    <p class="model-specs">4.0L V8 Twin-Turbo | 0-60 mph in 3.5s | 190 mph</p>
+                    <p class="model-price">$229,495</p>
+                </div>
+            </div>
+            <div class="model-card">
+                <img src="https://via.placeholder.com/400x250?text=Revuelto" alt="Revuelto" class="model-image">
+                <div class="model-details">
+                    <h3 class="model-name">Revuelto</h3>
+                    <p class="model-specs">Hybrid 6.5L V12 | 0-60 mph in 2.5s | 217 mph</p>
+                    <p class="model-price">$608,358</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Test Drive Section -->
+    <section id="test-drive" class="test-drive-section">
+        <form id="testDriveForm" class="test-drive-form">
+            <h2 class="text-center mb-4">Book a Test Drive</h2>
+            
+            <div class="form-group">
+                <input type="text" id="name" class="form-control" placeholder="Full Name" required>
+                <div class="error-message" id="nameError"></div>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" id="email" class="form-control" placeholder="Email Address" required>
+                <div class="error-message" id="emailError"></div>
+            </div>
+            
+            <div class="form-group">
+                <input type="tel" id="phone" class="form-control" placeholder="Phone Number" required>
+                <div class="error-message" id="phoneError"></div>
+            </div>
+            
+            <div class="form-group">
+                <select id="model" class="form-control" required>
+                    <option value="">Select Model</option>
+                    <option value="Aventador">Aventador</option>
+                    <option value="Huracan">Huracán</option>
+                    <option value="Urus">Urus</option>
+                    <option value="Revuelto">Revuelto</option>
+                </select>
+                <div class="error-message" id="modelError"></div>
+            </div>
+            
+            <div class="form-group">
+                <textarea id="message" class="form-control" placeholder="Additional Notes" rows="4"></textarea>
+            </div>
+            
+            <button type="submit" class="btn-primary w-100">Submit Test Drive Request</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <ul class="footer-links">
+            <li><a href="#">About Lamborghini</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p class="footer-copyright">© 2025 Automobili Lamborghini S.p.A. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('testDriveForm');
+
+            // Validation Functions
+            function validateName(name) {
+                const nameRegex = /^[A-Za-z\s]{2,50}$/;
+                return nameRegex.test(name.trim());
+            }
+
+            function validateEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email.trim());
+            }
+
+            function validatePhone(phone) {
+                const phoneRegex = /^\d{10}$/;
+                return phoneRegex.test(phone.trim());
+            }
+
+            // Clear previous error messages
+            function clearErrors() {
+                const errorMessages = document.querySelectorAll('.error-message');
+                errorMessages.forEach(el => el.textContent = '');
+                
+                const formGroups = document.querySelectorAll('.form-group');
+                formGroups.forEach(group => group.classList.remove('error'));
+            }
+
+            // Display error message
+            function showError(elementId, message) {
+                const errorEl = document.getElementById(`${elementId}Error`);
+                const formGroup = errorEl.closest('.form-group');
+                
+                errorEl.textContent = message;
+                formGroup.classList.add('error');
+            }
+
+            // Form Submission Handler
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                clearErrors();
+
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const model = document.getElementById('model').value;
+                const message = document.getElementById('message').value;
+
+                let isValid = true;
+
+                // Validate Name
+                if (!validateName(name)) {
+                    showError('name', 'Please enter a valid name (2-50 letters)');
+                    isValid = false;
+                }
+
+                // Validate Email
+                if (!validateEmail(email)) {
+                    showError('email', 'Please enter a valid email address');
+                    isValid = false;
+                }
+
+                // Validate Phone
+                if (!validatePhone(phone)) {
+                    showError('phone', 'Please enter a valid 10-digit phone number');
+                    isValid = false;
+                }
+
+                // Validate Model
+                if (!model) {
+                    showError('model', 'Please select a Lamborghini model');
+                    isValid = false;
+                }
+
+                // If validation passes
+                if (isValid) {
+                    try {
+                        const response = await fetch('/api/test-drive', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                name,
+                                email,
+                                phone,
+                                model,
+                                message
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to submit test drive request');
+                        }
+
+                        // Reset form and show success
+                        form.reset();
+                        alert('Test drive request submitted successfully!');
+                    } catch (error) {
+                        console.error('Submission error:', error);
+                        alert('Failed to submit test drive request. Please try again.');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamborghini - Admin Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #f0b007;
+            --dark-background: #111;
+            --light-text: #fff;
+            --accent-color: #444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-background);
+            color: var(--light-text);
+            line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+        }
+
+        .requests-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #222;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .requests-table th,
+        .requests-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+
+        .requests-table th {
+            background-color: #333;
+            color: var(--primary-color);
+        }
+
+        .requests-table tr:hover {
+            background-color: #333;
+        }
+
+        .timestamp {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .refresh-btn {
+            background-color: var(--primary-color);
+            color: var(--dark-background);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .refresh-btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Drive Requests</h1>
+        <button class="refresh-btn" onclick="loadRequests()">Refresh Data</button>
+        <table class="requests-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Model</th>
+                    <th>Message</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody id="requestsBody">
+                <!-- Data will be populated here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        async function loadRequests() {
+            try {
+                const response = await fetch('/api/test-drive');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch requests');
+                }
+                const requests = await response.json();
+                
+                const tbody = document.getElementById('requestsBody');
+                tbody.innerHTML = '';
+                
+                requests.forEach(request => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${request.name}</td>
+                        <td>${request.email}</td>
+                        <td>${request.phone}</td>
+                        <td>${request.model}</td>
+                        <td>${request.message || '-'}</td>
+                        <td class="timestamp">${new Date(request.timestamp).toLocaleString()}</td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error loading requests:', error);
+                alert('Failed to load test drive requests. Please try again.');
+            }
+        }
+
+        // Load requests when page loads
+        document.addEventListener('DOMContentLoaded', loadRequests);
+    </script>
+</body>
+</html> 
